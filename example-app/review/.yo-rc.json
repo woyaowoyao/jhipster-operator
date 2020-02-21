@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "jhiPrefix": "jhi",
+    "languages": [
+      "en",
+      "fr"
+    ],
+    "messageBroker": false,
+    "nativeLanguage": "en",
+    "packageName": "com.salaboy.review",
+    "packageFolder": "com/salaboy/review",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "serviceDiscoveryType": "eureka",
+    "skipClient": true,
+    "testFrameworks": [],
+    "websocket": false,
+    "baseName": "review",
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "buildTool": "maven",
+    "serverPort": "8081",
+    "skipUserManagement": true,
+    "jhipsterVersion": "6.4.1",
+    "clientPackageManager": "npm",
+    "cacheProvider": "hazelcast",
+    "jwtSecretKey": "MGZiMzBlMzVmNThiNWRiYWQ4NGE0NGViNTJmZDk4MmY2YzcyMGQ2MGY0NmQzOGE3ZTljNzllMjc3MTZhYTg1MDQ5NzAyZmU0MjQ0MzNiNDUwM2E0ZDU2ZTM5ZThlOWU0OTBlYjI4YjU4MWM4OTBiZTU1MzhmMzQwNmIyMmIyZGI=",
+    "embeddableLaunchScript": false,
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "blueprints": []
+  },
+  "entities": [
+    "Invoice",
+    "Shipment"
+  ]
+}
