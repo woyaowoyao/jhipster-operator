@@ -55,24 +55,6 @@ objects:
           timeoutSeconds: 600
           maxUnavailable: 25%
           maxSurge: 25%
-          pre:
-            failurePolicy: ignore
-            execNewPod:
-              command:
-                - '/bin/sh'
-                - '-c'
-                - |
-                  while true
-                  do
-                    rt=$(nc -z -w 1 ${APPLICATION_NAME}-mysqldb 80)
-                    if [ $? -eq 0 ]; then
-                      echo "DB is UP"
-                      break
-                    fi
-                    echo "DB is not yet reachable;sleep for 10s before retry"
-                    sleep 10
-                  done
-              containerName: ${APPLICATION_NAME}
         resources:
       replicas: 1
       template:
@@ -82,7 +64,7 @@ objects:
         spec:
           containers:
             - name: ${APPLICATION_NAME}
-              image: hub.docker.com/gateway
+              image: salaboy/gateway:jhipster
               imagePullPolicy: IfNotPresent
               env:
                 - name: SPRING_PROFILES_ACTIVE
