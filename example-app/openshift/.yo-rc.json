@@ -1,0 +1,14 @@
+{
+  "generator-jhipster": {
+    "appsFolders": ["gateway", "invoice", "review"],
+    "directoryPath": "../",
+    "serviceDiscoveryType": "eureka",
+    "monitoring": "elk",
+    "jwtSecretKey": "ZWJkN2JmNmZkNzY0YTAyNjlmMDlhYTRhYjBhYzAzNjgyMGZlYmM3NmExNzRmZjA5N2U3MmM1NzQyOThiMThjN2Y3OWQ2MDM0YmRhNjI5ZDRiODk3ZjgxNWFhN2FlMTU2MzM1Yw==",
+    "dockerRepositoryName": "hub.docker.com",
+    "dockerPushCommand": "docker push",
+    "openshiftNamespace": "jhipster",
+    "storageType": "ephemeral",
+    "registryReplicas": 2
+  }
+}
