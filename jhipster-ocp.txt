@@ -1,0 +1,63 @@
+oc new-app --template jhipster-registry-template -p APPLICATION_NAME=jhipster-registry   
+
+? Which applications do you want to include in your configuration? gateway, invoice, review
+? Do you want to setup monitoring for your applications ? Yes, for logs and metrics with the JHipster Console (based on ELK and Zipkin)
+JHipster registry detected as the service discovery and configuration provider used by your apps
+? Enter the admin password used to secure the JHipster Registry admin
+? What should we use for the OpenShift namespace? jhipster
+? Which *type* of database storage would you like to use? Ephemeral Storage
+? What should we use for the base Docker repository name? hub.docker.com
+? What command should we use for push Docker image to repository? docker push
+
+Checking Docker images in applications directories...
+ls: no such file or directory: /root/github/jhipster/jhipster-operator/example-app/gateway/target/jib-cache
+ls: no such file or directory: /root/github/jhipster/jhipster-operator/example-app/invoice/target/jib-cache
+ls: no such file or directory: /root/github/jhipster/jhipster-operator/example-app/review/target/jib-cache
+   create ../ocp/ocp-apply.sh
+   create ../ocp/gateway/gateway-deployment.yml
+   create ../ocp/gateway/gateway-mysql.yml
+   create ../ocp/invoice/invoice-deployment.yml
+   create ../ocp/invoice/invoice-mysql.yml
+   create ../ocp/review/review-deployment.yml
+   create ../ocp/review/review-mysql.yml
+   create ../ocp/registry/scc-config.yml
+   create ../ocp/registry/jhipster-registry.yml
+   create ../ocp/registry/application-configmap.yml
+   create ../ocp/monitoring/jhipster-monitoring.yml
+
+WARNING! OpenShift configuration generated, but no Jib cache found
+If you forgot to generate the Docker image for this application, please run:
+To generate the missing Docker image(s), please run:
+  ./mvnw -ntp -Pprod verify jib:dockerBuild in /root/github/jhipster/jhipster-operator/example-app/gateway
+  ./mvnw -ntp -Pprod verify jib:dockerBuild in /root/github/jhipster/jhipster-operator/example-app/invoice
+  ./mvnw -ntp -Pprod verify jib:dockerBuild in /root/github/jhipster/jhipster-operator/example-app/review
+
+WARNING! You will need to push your image to a registry. If you have not done so, use the following commands to tag and push the images:
+  docker image tag gateway hub.docker.com/gateway
+  docker push hub.docker.com/gateway
+  docker image tag invoice hub.docker.com/invoice
+  docker push hub.docker.com/invoice
+  docker image tag review hub.docker.com/review
+  docker push hub.docker.com/review
+
+You can deploy all your apps by running:
+  ../ocp/ocp-apply.sh
+OR
+  oc process -f ../ocp/registry/scc-config.yml | oc apply -f -
+  oc process -f ../ocp/monitoring/jhipster-monitoring.yml | oc apply -f -
+  oc process -f ../ocp/registry/application-configmap.yml | oc apply -f -
+  oc process -f ../ocp/registry/jhipster-registry.yml | oc apply -f -
+  oc process -f ../ocp/gateway/gateway-mysql.yml | oc apply -f -
+  oc process -f ../ocp/gateway/gateway-deployment.yml | oc apply -f -
+  oc process -f ../ocp/invoice/invoice-mysql.yml | oc apply -f -
+  oc process -f ../ocp/invoice/invoice-deployment.yml | oc apply -f -
+  oc process -f ../ocp/review/review-mysql.yml | oc apply -f -
+  oc process -f ../ocp/review/review-deployment.yml | oc apply -f -
+  
+  #package image
+  sh ./mvnw package -Pprod -DskipTests jib:dockerBuild
+  #fix 权限不够
+  oc adm policy add-scc-to-user anyuid -z default
+  
+   oc delete all -l app=gateway-app
+  oc rollout latest
