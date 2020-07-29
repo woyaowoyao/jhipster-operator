@@ -61,3 +61,4 @@ OR
   
    oc delete all -l app=gateway-app
   oc rollout latest
+
