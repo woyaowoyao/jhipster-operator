@@ -252,7 +252,7 @@ objects:
           targetPort: 5601
       selector:
         app: ${KB_APP_NAME}
-  - apiVersion: v11
+  - apiVersion: v1
     kind: Route
     metadata:
       name: ${KB_APP_NAME}

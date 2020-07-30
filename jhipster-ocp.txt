@@ -40,8 +40,12 @@ WARNING! You will need to push your image to a registry. If you have not done so
   docker image tag review hub.docker.com/review
   docker push hub.docker.com/review
 
+
+# run on ocp
+cd /home/laidongs-cn.ibm.com/github/jhipster-operator
+cd example-app/ocp
 You can deploy all your apps by running:
-  ../ocp/ocp-apply.sh
+  sh ocp-apply.sh
 OR
   oc process -f ../ocp/registry/scc-config.yml | oc apply -f -
   oc process -f ../ocp/monitoring/jhipster-monitoring.yml | oc apply -f -
