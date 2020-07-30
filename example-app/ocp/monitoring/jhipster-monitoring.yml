@@ -352,7 +352,7 @@ objects:
       to:
         kind: Service
         name: ${ZK_APP_NAME}
-        weight: '100'
+        weight: 100
       port:
         targetPort: 'http'
       wildcardPolicy: None
