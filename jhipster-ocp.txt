@@ -6,7 +6,7 @@ JHipster registry detected as the service discovery and configuration provider u
 ? Enter the admin password used to secure the JHipster Registry admin
 ? What should we use for the OpenShift namespace? jhipster
 ? Which *type* of database storage would you like to use? Ephemeral Storage
-? What should we use for the base Docker repository name? hub.docker.com
+? What should we use for the base Docker repository name? robin9999
 ? What command should we use for push Docker image to repository? docker push
 
 Checking Docker images in applications directories...
@@ -32,13 +32,28 @@ To generate the missing Docker image(s), please run:
   ./mvnw -ntp -Pprod verify jib:dockerBuild in /root/github/jhipster/jhipster-operator/example-app/invoice
   ./mvnw -ntp -Pprod verify jib:dockerBuild in /root/github/jhipster/jhipster-operator/example-app/review
 
+ oc rollout latest gateway
+
+sudo -i
+cd /home/laidongs-cn.ibm.com/github/jhipster-operator/example-app/gateway
+mvn install -Pprod jib:dockerBuild -DskipTests
+ mvn install -Pdev jib:dockerBuild -DskipTests
+
+cd  /home/laidongs-cn.ibm.com/github/jhipster-operator/example-app/invoice
+mvn install -Pprod jib:dockerBuild -DskipTests
+ mvn install -Pdev jib:dockerBuild -DskipTests
+
+ cd /home/laidongs-cn.ibm.com/github/jhipster-operator/example-app/review
+ mvn install -Pprod jib:dockerBuild -DskipTests
+  mvn install -Pdev jib:dockerBuild -DskipTests
+
 WARNING! You will need to push your image to a registry. If you have not done so, use the following commands to tag and push the images:
-  docker image tag gateway hub.docker.com/gateway
-  docker push hub.docker.com/gateway
-  docker image tag invoice hub.docker.com/invoice
-  docker push hub.docker.com/invoice
-  docker image tag review hub.docker.com/review
-  docker push hub.docker.com/review
+  docker image tag gateway robin9999/gateway
+  docker push robin9999/gateway
+  docker image tag invoice robin9999/invoice
+  docker push robin9999/invoice
+  docker image tag review robin9999/review
+  docker push robin9999/review
 
 
 # run on ocp
@@ -57,7 +72,9 @@ OR
   oc process -f ../ocp/invoice/invoice-deployment.yml | oc apply -f -
   oc process -f ../ocp/review/review-mysql.yml | oc apply -f -
   oc process -f ../ocp/review/review-deployment.yml | oc apply -f -
-  
+   
+   oc rollout latest gateway
+
   kubectl expose service jhipster-registry --type=NodePort --name=exposed-registry -n jhipster
   kubectl get svc exposed-registry -n jhipster
  kubectl scale statefulset jhipster-registry --replicas 3 -n jhipster
@@ -97,4 +114,8 @@ Sometimes the database changelog lock gets corrupted. You will need to connect t
   
    oc delete all -l app=gateway-app
   oc rollout latest
+
+   oc rollout latest dc/gateway
+   oc get pods
+   oc logs pod/
 
