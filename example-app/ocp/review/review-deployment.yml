@@ -82,7 +82,7 @@ objects:
         spec:
           containers:
             - name: ${APPLICATION_NAME}
-              image: hub.docker.com/review
+              image: docker.io/robin9999/review
               imagePullPolicy: IfNotPresent
               env:
                 - name: SPRING_PROFILES_ACTIVE

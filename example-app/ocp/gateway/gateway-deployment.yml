@@ -64,7 +64,7 @@ objects:
         spec:
           containers:
             - name: ${APPLICATION_NAME}
-              image: salaboy/gateway:jhipster
+              image: docker.io/robin9999/gateway:latest
               imagePullPolicy: IfNotPresent
               env:
                 - name: SPRING_PROFILES_ACTIVE

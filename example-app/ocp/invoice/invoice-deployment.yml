@@ -64,7 +64,7 @@ objects:
         spec:
           containers:
             - name: ${APPLICATION_NAME}
-              image: invoice:latest
+              image: docker.io/robin9999/invoice:latest
               imagePullPolicy: IfNotPresent
               env:
                 - name: SPRING_PROFILES_ACTIVE
