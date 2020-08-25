@@ -118,4 +118,15 @@ Sometimes the database changelog lock gets corrupted. You will need to connect t
    oc rollout latest dc/gateway
    oc get pods
    oc logs pod/
+   oc rollout latest dc/invoice
+ oc logs pod/gateway-mysqldb-1-q6pnv
+ oc rsh pod/gateway-mysqldb-1-q6pnv
+
+   echo $MYSQL_PASSWORD    #   mysql -h localhost -u user176 -p 20otSFupxe0SYgPk
+   echo $MYSQL_ROOT_PASSWORD   # mysql -h localhost -u root -p  $MYSQL_ROOT_PASSWORD
+   echo $MYSQL_USER   #pxH68tLEYONLnR14
+
+   mysql -h 127.0.0.1 -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE
+   mysql -h 127.0.0.1 -u $MYSQL_USER -p $MYSQL_PASSWORD -D $MYSQL_DATABASE
+
 
